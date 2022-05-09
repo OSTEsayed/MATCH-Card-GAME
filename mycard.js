@@ -6,9 +6,11 @@ class Start_play {
     console.log("1",this.time)
   }
 begin(){
-  this.time_remaining=6;
-  this.mix_the_cards();
+  this.time_remaining=10;
+  this.unflip_all();
+  console.log("game Start",this.cards)
   this.timer_alert =this.start_the_timer()
+  this.mix_the_cards();
   
 }
 start_the_timer(){
@@ -23,11 +25,12 @@ start_the_timer(){
   },1000)
 }
 stop_the_timer(){
-  clearInterval(this.timer_alert);
+
   this.lose();
   
 }
 lose(){
+  clearInterval(this.timer_alert);
   let start = document.querySelector("header");
   let main =document.querySelector("main")
 
@@ -39,17 +42,25 @@ lose(){
 
   console.log("ak khsarti nikomok");
 }
+unflip_all(){
+for (let i = 0; i < this.cards.length; i++) {
+  this.cards[i].classList="flip";
+}
+}
 mix_the_cards(){ 
   // var cards_son =[] 
   // this.cards.forEach(element => {
-  //   cards_son.push(element.childNodes[3])
-  // cards_son.splice(x-1,1)
-  // });
-for (let i = 0; i < this.cards.length; i++) {
-  let x=Math.floor(Math.random() *15);
-  let sp1=this.cards[x].childNodes[3];
-  this.cards[x].replaceChild(this.cards[i].childNodes[3], this.cards[x].childNodes[3])
-  this.cards[i].replaceChild(sp1, this.cards[i].childNodes[3])
+    //   cards_son.push(element.childNodes[3])
+    // cards_son.splice(x-1,1)
+    // });
+    for (let i = 0; i < this.cards.length; i++) {
+      let x=Math.floor(Math.random() *15);
+      let sp1=this.cards[x].childNodes[3];
+      let sp2= this.cards[i].childNodes[3].cloneNode(true);
+
+      this.cards[x].replaceChild(sp2,this.cards[x].childNodes[3])
+      
+      this.cards[i].replaceChild(sp1,this.cards[i].childNodes[3])
 }
 
 
@@ -82,7 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
       m3alm.style.display="none";
       start.style.display="none";
       main.style.opacity="1";
-      the_game.begin()
+       the_game.begin()
+      
     });
     
   })
