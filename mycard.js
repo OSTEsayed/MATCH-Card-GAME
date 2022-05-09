@@ -12,6 +12,7 @@ class Start_play {
   }
 begin(){
   this.counter=0;
+  this.attempt.innerHTML=this.counter
   this.stop_moving=true;
   this.checked=[]
   this.time_remaining=this.total;
@@ -88,6 +89,8 @@ check_cards(card1,card2){
   if(card1==card2){
     return
   }
+  this.counter++
+  this.attempt.innerHTML=this.counter
 if(card1.childNodes[3].childNodes[1].src==card2.childNodes[3].childNodes[1].src){
   console.log("ahna hna 2: ",card2.childNodes[3].childNodes[0].src)
   console.log("ahna hna 1: ",card1.childNodes[3].childNodes[0].src)
@@ -114,13 +117,14 @@ flip_the_card(card){
     return
   }
   else{
-    this.counter++
-    this.attempt.innerHTML=this.counter
    if (this.check_for==null){
       card.classList="flip is-flipped";
+    this.counter++
+    this.attempt.innerHTML=this.counter
       this.check_for=card;
   }
   else {
+    
   this.stop_moving=false;
     let x=this
     card.classList="flip is-flipped";
